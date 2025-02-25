@@ -14,7 +14,7 @@ ext {
 
 android {
     compileSdkVersion project.properties.compileSdkVersion.toInteger()
-    ndkVersion = System.getenv("JITPACK_NDK_VERSION") ?: project.properties.ndkVersion
+    ndkVersion '28.0.13004108'
     def appVersionName = System.getenv("TERMUX_APP_VERSION_NAME") ?: ""
     def apkVersionTag = System.getenv("TERMUX_APK_VERSION_TAG") ?: ""
     def splitAPKsForDebugBuilds = System.getenv("TERMUX_SPLIT_APKS_FOR_DEBUG_BUILDS") ?: "1"
@@ -125,6 +125,7 @@ android {
             useLegacyPackaging true
         }
     }
+    buildToolsVersion '35.0.1'
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
@@ -142,8 +143,8 @@ android {
 
 dependencies {
     testImplementation "junit:junit:4.13.2"
-    testImplementation "org.robolectric:robolectric:4.10"
-    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.5"
+    testImplementation 'org.robolectric:robolectric:4.14.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 }
 
 task versionName {
