@@ -18,6 +18,9 @@ ext {
 
 android {
     compileSdk 35
+    buildFeatures {
+        buildConfig true
+    }
     ndkVersion '28.0.13004108'
     def appVersionName = System.getenv("TERMUX_APP_VERSION_NAME") ?: ""
     def apkVersionTag = System.getenv("TERMUX_APK_VERSION_TAG") ?: ""
