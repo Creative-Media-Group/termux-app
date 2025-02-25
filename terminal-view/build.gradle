@@ -3,9 +3,7 @@ apply plugin: 'maven-publish'
 
 android {
     compileSdk 35
-    buildFeatures {
-        buildConfig true
-    }
+    namespace 'com.termux'
     dependencies {
         implementation "androidx.annotation:annotation:1.9.1"
         api project(":terminal-emulator")

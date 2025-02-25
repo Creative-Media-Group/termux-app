@@ -1,6 +1,7 @@
 import java.security.DigestInputStream
 import java.security.MessageDigest
 import java.util.regex.Pattern
+import org.gradle.api.GradleException
 
 plugins {
     id "com.android.application"
@@ -17,6 +18,7 @@ ext {
 }
 
 android {
+    namespace "com.termux"
     compileSdk 35
     buildFeatures {
         buildConfig true
