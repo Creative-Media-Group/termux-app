@@ -4,7 +4,9 @@ apply plugin: 'maven-publish'
 android {
     compileSdk 35
     ndkVersion '28.0.13004108'
-
+    buildFeatures {
+        buildConfig true
+    }
     defaultConfig {
         minSdk 29
         targetSdk 35
