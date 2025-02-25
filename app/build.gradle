@@ -140,7 +140,7 @@ android {
         variant.outputs.configureEach { output ->
             def buildType = variant.buildType.name
             def outputFileName
-            def abi = output.filters.find { it.name == 'abi' }?.identifier
+            def abi = output.getFilter(com.android.build.OutputFile.ABI)?.identifier
             if (buildType == "debug") {
                 outputFileName = new File("termux-app_" + (apkVersionTag ?: project.ext.packageVariant + "-debug") + "_" + (abi ?: "universal") + ".apk")
             } else if (buildType == "release") {
