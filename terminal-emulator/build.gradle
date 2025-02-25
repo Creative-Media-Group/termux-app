@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdk 35
-    ndkVersion '28.0.13004108'
-    namespace 'com.termux'
+    compileSdk = 35
+    ndkVersion = '28.0.13004108'
+    namespace = 'com.termux'
     defaultConfig {
-        minSdk 29
-        targetSdk 35
+        minSdk = 29
+        targetSdk = 35
 
         externalNativeBuild {
             ndkBuild {

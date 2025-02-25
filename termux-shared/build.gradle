@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdk 35
-    namespace 'com.termux'
+    compileSdk = 35
+    namespace = 'com.termux'
     dependencies {
         implementation "androidx.appcompat:appcompat:1.7.0"
         implementation "androidx.annotation:annotation:1.9.1"
@@ -31,8 +31,8 @@ android {
     }
 
     defaultConfig {
-        minSdk 29
-        targetSdk 35
+        minSdk = 29
+        targetSdk = 35
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             ndkBuild {
@@ -50,7 +50,7 @@ android {
 
     compileOptions {
         // Flag to enable support for the new language APIs
-        coreLibraryDesugaringEnabled true
+        coreLibraryDesugaringEnabled = true
 
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -60,7 +60,7 @@ android {
             path file('src/main/cpp/Android.mk')
         }
     }
-    ndkVersion '28.0.13004108'
+    ndkVersion = '28.0.13004108'
 }
 
 dependencies {
