@@ -5,6 +5,7 @@ import org.gradle.api.GradleException
 
 plugins {
     id "com.android.application"
+    id "org.openrewrite.rewrite-gradle-plugin" version "7.1.6"
 }
 
 ext {
