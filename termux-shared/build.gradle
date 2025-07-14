@@ -2,19 +2,20 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdk = 35
-    namespace = 'com.termux'
+    compileSdkVersion project.properties.compileSdkVersion.toInteger()
+    ndkVersion = System.getenv("JITPACK_NDK_VERSION") ?: project.properties.ndkVersion
+
     dependencies {
-        implementation "androidx.appcompat:appcompat:1.7.0"
-        implementation "androidx.annotation:annotation:1.9.1"
-        implementation "androidx.core:core:1.15.0"
-        implementation "com.google.android.material:material:1.12.0"
-        implementation "com.google.guava:guava:33.3.1-jre"
+        implementation "androidx.appcompat:appcompat:1.3.1"
+        implementation "androidx.annotation:annotation:1.3.0"
+        implementation "androidx.core:core:1.6.0"
+        implementation "com.google.android.material:material:1.4.0"
+        implementation "com.google.guava:guava:24.1-jre"
         implementation "io.noties.markwon:core:$markwonVersion"
         implementation "io.noties.markwon:ext-strikethrough:$markwonVersion"
         implementation "io.noties.markwon:linkify:$markwonVersion"
         implementation "io.noties.markwon:recycler:$markwonVersion"
-        implementation "org.lsposed.hiddenapibypass:hiddenapibypass:5.0"
+        implementation "org.lsposed.hiddenapibypass:hiddenapibypass:6.1"
 
         // Do not increment version higher than 1.0.0-alpha09 since it will break ViewUtils and needs to be looked into
         // noinspection GradleDependency
@@ -23,7 +24,7 @@ android {
         // Do not increment version higher than 2.5 or there
         // will be runtime exceptions on android < 8
         // due to missing classes like java.nio.file.Path.
-        implementation "commons-io:commons-io:2.18.0"
+        implementation "commons-io:commons-io:2.5"
 
         implementation project(":terminal-view")
 
@@ -31,8 +32,8 @@ android {
     }
 
     defaultConfig {
-        minSdk = 29
-        targetSdk = 35
+        minSdkVersion project.properties.minSdkVersion.toInteger()
+        targetSdkVersion project.properties.targetSdkVersion.toInteger()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             ndkBuild {
@@ -50,7 +51,7 @@ android {
 
     compileOptions {
         // Flag to enable support for the new language APIs
-        coreLibraryDesugaringEnabled = true
+        coreLibraryDesugaringEnabled true
 
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -60,19 +61,18 @@ android {
             path file('src/main/cpp/Android.mk')
         }
     }
-    ndkVersion = '28.0.13004108'
 }
 
 dependencies {
     testImplementation "junit:junit:4.13.2"
-    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+    androidTestImplementation "androidx.test.ext:junit:1.1.3"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.5"
 }
 
-tasks.register('sourceJar', Jar) {
+task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    archiveClassifier.set("sources")
+    classifier "sources"
 }
 
 afterEvaluate {
@@ -80,7 +80,7 @@ afterEvaluate {
         publications {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
-                from components.findByName("release") ?: components.findByName("default")
+                from components.release
                 groupId = 'com.termux'
                 artifactId = 'termux-shared'
                 version = '0.118.0'
